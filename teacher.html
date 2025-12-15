@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+     <link rel="stylesheet" href="normalize.css">
+   
+    <title>English Training | Tu Puente al Trabajo Internacional</title>
+    <style>
+        /* --- Estilos Generales --- */
+        :root {
+            --primary-color: #2c3e50; /* Azul oscuro profesional */
+            --accent-color: #e67e22; /* Naranja para llamadas a la acción (Mundo Lingo vibes) */
+            --light-bg: #f8f9fa;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header / Nav --- */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--primary-color);
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        .btn-cta {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-cta:hover {
+            background-color: #d35400;
+            transform: translateY(-2px);
+        }
+
+        /* --- Sobre Mí / Autoridad --- */
+        .about-section {
+            padding: 80px 0;
+            background-color: #fff;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .highlight-box {
+            background: var(--light-bg);
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* --- Metodología --- */
+        .services {
+            padding: 80px 0;
+            background-color: var(--light-bg);
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+         
+        /* --- Testimonios --- */
+.testimonials-section {
+    padding: 80px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.testimonial-card {
+    background: #f8f9fa; /* Fondo gris muy suave */
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 5px solid var(--accent-color); /* Línea naranja de acento */
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-3px);
+}
+
+.t-quote {
+    font-size: 1rem;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.t-author {
+    font-weight: bold;
+    color: var(--primary-color);
+    display: block;
+}
+
+.t-role {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+/* --- Actualización CSS Testimonios --- */
+
+/* Aumentamos un poco el margen inferior de la cita */
+.t-quote {
+    font-size: 1rem;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 25px; 
+    display: block;
+}
+
+/* Ahora t-meta es un contenedor flexible para alinear foto y texto */
+.t-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espacio entre la foto y el texto */
+    padding-top: 15px;
+    border-top: 1px solid #eee; /* Una línea sutil separadora */
+}
+
+/* Estilos para la nueva imagen */
+.t-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Hace la imagen circular */
+    object-fit: cover; /* Asegura que la foto no se deforme */
+    border: 3px solid #fff; /* Borde blanco para resaltar */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Nuevo contenedor para agrupar Nombre y Rol a la derecha de la foto */
+.t-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ajustes menores a los textos */
+.t-author {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.t-role {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 3px;
+}
+        /* --- Social Proof --- */
+        .clients {
+            padding: 60px 0;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .clients h2 { color: white; }
+
+        /* --- Footer --- */
+        footer {
+            background: #222;
+            color: #ddd;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo" style="font-weight: bold; font-size: 1.2rem;">ENGLISH TRAINING </div>
+                <div class="nav-links">
+                    <a href="#testimonials-section">TESTIMONIOS</a>
+                    
+                    </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Deja de estudiar inglés, empieza a usarlo para trabajar</h1>
+            <p>Formación intensiva diseñada para profesionales que buscan oportunidades en el exterior. Supera la entrevista técnica y trabaja en equipos globales.</p>
+            <a href="#contacto" class="btn-cta">Agendar Asesoría Gratuita</a>
+        </div>
+    </section>
+
+    <section class="about-section container">
+        <div class="about-image">
+            <img src="teacher/perfil.jpg" alt="Nicolás en Mundo Lingo">
+        </div>
+        <div class="about-text">
+            <h2>Más que un profesor, un conector cultural</h2>
+            <p>Conseguir trabajo afuera no depende de la gramática perfecta, sino de la capacidad de comunicar tus ideas con confianza en un entorno multicultural.</p>
+            
+            <p>Mi experiencia es real y actual:</p>
+            <ul>
+                <li><strong>Manager de Mundo Lingo La Plata:</strong> Organizo y lidero uno de los eventos de intercambio de idiomas más grandes, ayudando a cientos de personas a perder el miedo a hablar.</li>
+                <li><strong>Experiencia Internacional:</strong> Actualmente trabajo con clientes en el exterior, gestionando proyectos y equipos de forma remota.</li>
+                <li><strong>Formador de Talentos:</strong> He entrenado a profesionales para pasar de "entender inglés" a "negociar contratos en inglés".</li>
+            </ul>
+
+            <div class="highlight-box">
+                "No te enseño inglés de libro de texto. Te entreno para la reunión del lunes a las 9 AM."
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2>Entrenamiento Intensivo de Inserción Laboral</h2>
+            <p>Mi programa no es para todos. Es para quienes tienen una meta clara: <strong>trabajar para afuera.</strong></p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>🎯 Mock Interviews</h3>
+                    <p>Simulamos entrevistas reales de HR y técnicas. Preparamos las respuestas a las preguntas difíciles ("Tell me about yourself", "Weaknesses") para que suenen naturales, no memorizadas.</p>
+                </div>
+                <div class="service-card">
+                    <h3>💻 Tech & Business Vocabulary</h3>
+                    <p>Olvídate del "cat is on the table". Aprenderás terminología de metodologías ágiles, desarrollo de software, negociación y gestión de proyectos.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🚀 Perfil Profesional</h3>
+                    <p>Optimización de LinkedIn y CV en inglés. Te ayudo a vender tu perfil para que sea atractivo a los reclutadores internacionales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="testimonials-section" id="testimonials-section">
+    <div class="container">
+        <h2>Casos de Éxito Real</h2>
+        <p style="max-width: 600px; margin: 0 auto 40px auto;">Profesionales que dejaron de estudiar inglés y empezaron a usarlo para facturar en dólares.</p>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <span class="t-quote">"Pasé de tener pánico en las entrevistas a negociar mi salario. Las simulaciones técnicas fueron clave. Hoy trabajo 100% remoto para USA."</span>
+                <div class="t-meta">
+                    <img src="teacher/testimonio1.png" alt="Foto de Luciano" class="t-img">
+                    <div class="t-info">
+                        <span class="t-author">Luciano Velázquez</span>
+                        <span class="t-role">SDR @ USA Tech Company</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <span class="t-quote">"Nico entiende la industria IT. No perdimos tiempo con gramática escolar, fuimos directo a cómo defender mi código y arquitectura en inglés."</span>
+                <div class="t-meta">
+                    <img src="teacher/testimonio2.png" alt="Foto de Sofía" class="t-img">
+                    <div class="t-info">
+                        <span class="t-author">Sofía D. Amico</span>
+                        <span class="t-role">Frontend Dev @ Startup Berlín</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <span class="t-quote">"Necesitaba confianza para liderar dailies con equipos de India. El enfoque práctico y la experiencia de Nico como manager fueron la diferencia."</span>
+                <div class="t-meta">
+                    <img src="teacher/testimonio3.png" alt="Foto de Esteban" class="t-img">
+                    <div class="t-info">
+                        <span class="t-author">Esteban Urusuleta Ruiz</span>
+                        <span class="t-role">PM @ Remote Contractor</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="clients">
+        <div class="container">
+            <h2>Resultados Reales</h2>
+            <p style="max-width: 600px; margin: 0 auto;">
+                Mis alumnos hoy trabajan en empresas de Estados Unidos y Europa. Mi propia carrera se basa en la comunicación efectiva con múltiples clientes internacionales activos.
+            </p>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container">
+            <h3>¿Listo para el salto internacional?</h3>
+            <p>Escríbeme para evaluar tu nivel y armar un plan a medida.</p>
+            <br>
+            <a href="https://wa.me/5491141619459?text=Hola%20Nico,%20vi%20tu%20web%20y%20quiero%20mejorar%20mi%20ingl%C3%A9s%20para%20trabajar%20afuera" class="btn-cta" target="_blank">
+    Contactar por WhatsApp
+</a>
+            <br><br>
+            <p>&copy; 2024 Nicolás Montanari - English Training & Development</p>
+        </div>
+    </footer>
+
+</body>
+</html>
