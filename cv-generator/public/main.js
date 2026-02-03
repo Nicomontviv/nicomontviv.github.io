@@ -1,26 +1,32 @@
 // ============================================
-// CV GENERATOR - VERSIÓN CON jsPDF DIRECTO
+// CV GENERATOR - VERSIÓN BILINGÜE
 // ============================================
 
-// 1. Helper: Formateo de Fechas
-function formatDate(dateString) {
-    if (!dateString || dateString.trim() === '') return 'Presente';
+// 1. Helper: Formateo de Fechas con Traducción
+function formatDate(dateString, lang = 'es') {
+    if (!dateString || dateString.trim() === '') return lang === 'es' ? 'Presente' : 'Present';
     
     try {
-        const [year, month] = dateString.split('-');
-        const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-        const monthIndex = parseInt(month) - 1;
+        const parts = dateString.split('-');
+        const year = parts[0];
+        const month = parts[1];
         
+        const months = {
+            es: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        };
+        
+        const monthIndex = parseInt(month) - 1;
         if (monthIndex >= 0 && monthIndex < 12 && year) {
-            return `${months[monthIndex]} ${year}`;
+            return `${months[lang][monthIndex]} ${year}`;
         }
-        return 'Presente';
+        return lang === 'es' ? 'Presente' : 'Present';
     } catch (error) {
-        return 'Presente';
+        return lang === 'es' ? 'Presente' : 'Present';
     }
 }
 
-// 2. Funciones para crear botones de eliminar
+// 2. Funciones para crear botones de eliminar 
 function createRemoveBtn(el) {
     const btn = document.createElement('button');
     btn.className = 'btn-remove';
@@ -30,7 +36,7 @@ function createRemoveBtn(el) {
     return btn;
 }
 
-// 3. Función para agregar experiencia laboral
+// 3. Funciones para agregar secciones (Work, Education, Award) 
 function addWork() {
     const container = document.getElementById('work-list');
     const div = document.createElement('div');
@@ -48,7 +54,6 @@ function addWork() {
     container.appendChild(div);
 }
 
-// 4. Función para agregar educación
 function addEducation() {
     const container = document.getElementById('education-list');
     const div = document.createElement('div');
@@ -61,7 +66,7 @@ function addEducation() {
             <div><label>Hasta:</label><input type="date" class="e-end"></div>
         </div>
         <select class="e-status" style="width:100%; margin-top:5px; padding:5px;">
-            <option value="Finalizado">Finalizado</option>
+            <option value="Finalizado">Finalizado / Completed</option>
             <option value="En curso">En curso / In progress</option>
         </select>
     `;
@@ -69,7 +74,6 @@ function addEducation() {
     container.appendChild(div);
 }
 
-// 5. Función para agregar premios/awards
 function addAward() {
     const container = document.getElementById('awards-list');
     const div = document.createElement('div');
@@ -83,13 +87,11 @@ function addAward() {
     container.appendChild(div);
 }
 
-// 6. Función auxiliar para sanitizar texto
 function sanitizeHTML(text) {
-    if (!text) return '';
-    return text.trim();
+    return text ? text.trim() : '';
 }
 
-// 7. NUEVA FUNCIÓN: Generar PDF con jsPDF + html2canvas
+// 4. Lógica de Generación
 document.getElementById('cv-form').onsubmit = async (e) => {
     e.preventDefault();
     
@@ -98,8 +100,36 @@ document.getElementById('cv-form').onsubmit = async (e) => {
     btn.innerText = 'Generando...';
     btn.disabled = true;
 
+    // --- CONFIGURACIÓN DE IDIOMA ---
+    const lang = document.getElementById('cv-language').value; // Asegúrate de tener este ID en tu HTML
+    const labels = {
+        es: {
+            summary: "RESUMEN",
+            experience: "EXPERIENCIA LABORAL",
+            education: "EDUCACIÓN",
+            awards: "PREMIOS Y RECONOCIMIENTOS",
+            skills_lang: "HABILIDADES E IDIOMAS",
+            skills: "Habilidades",
+            languages: "Idiomas",
+            present: "Presente",
+            inProgress: "(en curso)"
+        },
+        en: {
+            summary: "SUMMARY",
+            experience: "WORK EXPERIENCE",
+            education: "EDUCATION",
+            awards: "AWARDS",
+            skills_lang: "SKILLS & LANGUAGES",
+            skills: "Skills",
+            languages: "Languages",
+            present: "Present",
+            inProgress: "(in progress)"
+        }
+    };
+    const t = labels[lang];
+
     try {
-        // Recopilar datos
+        // Recopilar datos 
         const data = {
             basics: {
                 name: sanitizeHTML(document.getElementById('name').value),
@@ -114,7 +144,7 @@ document.getElementById('cv-form').onsubmit = async (e) => {
             work: Array.from(document.querySelectorAll('#work-list .item-group')).map(i => ({
                 name: sanitizeHTML(i.querySelector('.w-name').value),
                 position: sanitizeHTML(i.querySelector('.w-pos').value),
-                displayDate: `${formatDate(i.querySelector('.w-start').value)} — ${formatDate(i.querySelector('.w-end').value)}`,
+                displayDate: `${formatDate(i.querySelector('.w-start').value, lang)} — ${formatDate(i.querySelector('.w-end').value, lang)}`,
                 summary: sanitizeHTML(i.querySelector('.w-sum').value)
             })),
             education: Array.from(document.querySelectorAll('#education-list .item-group')).map(i => {
@@ -125,214 +155,102 @@ document.getElementById('cv-form').onsubmit = async (e) => {
                     institution: sanitizeHTML(i.querySelector('.e-inst').value),
                     area: sanitizeHTML(i.querySelector('.e-area').value),
                     displayDate: (status === 'En curso') 
-                        ? `${formatDate(start)} — Presente` 
-                        : `${formatDate(start)} — ${formatDate(end)}`,
-                    statusLabel: (status === 'En curso') ? '(in progress)' : ''
+                        ? `${formatDate(start, lang)} — ${t.present}` 
+                        : `${formatDate(start, lang)} — ${formatDate(end, lang)}`,
+                    statusLabel: (status === 'En curso') ? t.inProgress : ''
                 };
             }),
             awards: Array.from(document.querySelectorAll('#awards-list .item-group')).map(i => ({
                 title: sanitizeHTML(i.querySelector('.a-title').value),
                 awarder: sanitizeHTML(i.querySelector('.a-awarder').value),
-                date: formatDate(i.querySelector('.a-date').value)
+                date: formatDate(i.querySelector('.a-date').value, lang)
             })),
             skills: sanitizeHTML(document.getElementById('skills').value),
             languages: sanitizeHTML(document.getElementById('languages').value),
             filename: document.getElementById('pdf-name').value.trim() || 'CV_Nicolas_Montanari'
         };
 
-        console.log('Datos recopilados:', data);
-
-        // Crear contenedor temporal VISIBLE
-        const container = document.createElement('div');
-        container.id = 'pdf-container';
-        container.style.cssText = `
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 210mm;
-            background: white;
-            z-index: 10000;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
-        `;
-        
-        container.innerHTML = `
-            <div id="cv-render" style="
-                width: 210mm;
-                min-height: 297mm;
-                background: #ffffff;
-                padding: 20mm;
-                box-sizing: border-box;
-                font-family: Arial, Helvetica, sans-serif;
-                color: #000;
-                font-size: 12px;
-            ">
-                <!-- HEADER -->
+        // --- VARIABLE DEL TEMPLATE ---
+        const cvTemplate = `
+            <div id="cv-render" style="width: 210mm; min-height: 297mm; background: #ffffff; padding: 20mm; box-sizing: border-box; font-family: Arial, sans-serif; color: #000; font-size: 12px;">
                 <div style="border-bottom: 3px solid #000; padding-bottom: 12px; margin-bottom: 20px;">
-                    <h1 style="font-size: 32px; margin: 0 0 8px 0; text-transform: uppercase; font-weight: bold; color: #000; letter-spacing: 1px;">
-                        ${data.basics.name}
-                    </h1>
-                    <div style="font-size: 16px; font-weight: bold; color: #444; margin: 6px 0;">
-                        ${data.basics.label}
-                    </div>
-                    <div style="font-size: 13px; color: #555;">
-                        ${data.basics.email} | ${data.basics.location.city}, ${data.basics.location.region}
-                    </div>
+                    <h1 style="font-size: 32px; margin: 0 0 8px 0; text-transform: uppercase; font-weight: bold;">${data.basics.name}</h1>
+                    <div style="font-size: 16px; font-weight: bold; color: #444; margin: 6px 0;">${data.basics.label}</div>
+                    <div style="font-size: 13px; color: #555;">${data.basics.email} | ${data.basics.location.city}, ${data.basics.location.region}</div>
                 </div>
 
-                <!-- SUMMARY -->
                 ${data.basics.summary ? `
                 <div style="margin-bottom: 20px;">
-                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold; color: #000;">
-                        SUMMARY
-                    </h2>
-                    <p style="font-size: 12px; margin: 0; line-height: 1.6; color: #000; text-align: justify;">
-                        ${data.basics.summary}
-                    </p>
-                </div>
-                ` : ''}
+                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold;">${t.summary}</h2>
+                    <p style="font-size: 12px; margin: 0; line-height: 1.6; text-align: justify;">${data.basics.summary}</p>
+                </div>` : ''}
 
-                <!-- EXPERIENCE -->
-                ${data.work.length > 0 ? `
                 <div style="margin-bottom: 20px;">
-                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold; color: #000;">
-                        EXPERIENCE
-                    </h2>
+                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold;">${t.experience}</h2>
                     ${data.work.map(job => `
                     <div style="margin-bottom: 16px; page-break-inside: avoid;">
                         <div style="margin-bottom: 4px;">
-                            <strong style="font-size: 13px; color: #000;">
-                                ${job.position} - ${job.name}
-                            </strong>
-                            <span style="float: right; font-size: 12px; color: #666;">
-                                ${job.displayDate}
-                            </span>
+                            <strong style="font-size: 13px;">${job.position} - ${job.name}</strong>
+                            <span style="float: right; font-size: 12px; color: #666;">${job.displayDate}</span>
                             <div style="clear: both;"></div>
                         </div>
-                        ${job.summary ? `
-                        <p style="font-size: 12px; margin: 4px 0 0 0; line-height: 1.5; color: #000; text-align: justify;">
-                            ${job.summary}
-                        </p>
-                        ` : ''}
-                    </div>
-                    `).join('')}
+                        <p style="font-size: 12px; margin: 4px 0 0 0; line-height: 1.5; text-align: justify;">${job.summary}</p>
+                    </div>`).join('')}
                 </div>
-                ` : ''}
 
-                <!-- EDUCATION -->
-                ${data.education.length > 0 ? `
                 <div style="margin-bottom: 20px;">
-                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold; color: #000;">
-                        EDUCATION
-                    </h2>
+                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold;">${t.education}</h2>
                     ${data.education.map(edu => `
                     <div style="margin-bottom: 14px; page-break-inside: avoid;">
                         <div style="margin-bottom: 3px;">
-                            <strong style="font-size: 13px; color: #000;">
-                                ${edu.institution}
-                            </strong>
-                            <span style="float: right; font-size: 12px; color: #666;">
-                                ${edu.displayDate}
-                            </span>
+                            <strong style="font-size: 13px;">${edu.institution}</strong>
+                            <span style="float: right; font-size: 12px; color: #666;">${edu.displayDate}</span>
                             <div style="clear: both;"></div>
                         </div>
-                        <div style="font-size: 12px; font-style: italic; color: #444;">
-                            ${edu.area} ${edu.statusLabel}
-                        </div>
-                    </div>
-                    `).join('')}
+                        <div style="font-size: 12px; font-style: italic; color: #444;">${edu.area} ${edu.statusLabel}</div>
+                    </div>`).join('')}
                 </div>
-                ` : ''}
 
-                <!-- AWARDS -->
                 ${data.awards.length > 0 ? `
                 <div style="margin-bottom: 20px;">
-                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold; color: #000;">
-                        AWARDS
-                    </h2>
+                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold;">${t.awards}</h2>
                     ${data.awards.map(a => `
-                    <div style="margin-bottom: 10px; page-break-inside: avoid;">
-                        <strong style="font-size: 12px; color: #000;">
-                            ${a.title}
-                        </strong>
-                        ${a.awarder ? `<span style="font-size: 12px; color: #000;"> - ${a.awarder}</span>` : ''}
-                        <span style="float: right; font-size: 12px; color: #666;">
-                            ${a.date}
-                        </span>
+                    <div style="margin-bottom: 10px;">
+                        <strong>${a.title}</strong> ${a.awarder ? `- ${a.awarder}` : ''}
+                        <span style="float: right; color: #666;">${a.date}</span>
                         <div style="clear: both;"></div>
-                    </div>
-                    `).join('')}
-                </div>
-                ` : ''}
+                    </div>`).join('')}
+                </div>` : ''}
 
-                <!-- SKILLS & LANGUAGES -->
                 <div>
-                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold; color: #000;">
-                        SKILLS & LANGUAGES
-                    </h2>
-                    ${data.skills ? `
-                    <p style="font-size: 12px; margin: 0 0 8px 0; line-height: 1.5; color: #000;">
-                        <strong>Skills:</strong> ${data.skills}
-                    </p>
-                    ` : ''}
-                    ${data.languages ? `
-                    <p style="font-size: 12px; margin: 0; line-height: 1.5; color: #000;">
-                        <strong>Languages:</strong> ${data.languages}
-                    </p>
-                    ` : ''}
+                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold;">${t.skills_lang}</h2>
+                    <p style="font-size: 12px; margin: 0 0 8px 0;"><strong>${t.skills}:</strong> ${data.skills}</p>
+                    <p style="font-size: 12px; margin: 0;"><strong>${t.languages}:</strong> ${data.languages}</p>
                 </div>
             </div>
         `;
 
+        // Generación con html2canvas + jsPDF 
+        const container = document.createElement('div');
+        container.style.cssText = "position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 210mm; background: white; z-index: 10000;";
+        container.innerHTML = cvTemplate;
         document.body.appendChild(container);
-        console.log('Contenedor agregado al DOM');
 
-        // Esperar renderizado
-        await new Promise(resolve => setTimeout(resolve, 500));
-
+        await new Promise(r => setTimeout(r, 500));
         const element = document.getElementById('cv-render');
-        console.log('Elemento a capturar:', element);
-
-        // Capturar con html2canvas
-        const canvas = await html2canvas(element, {
-            scale: 2,
-            useCORS: true,
-            backgroundColor: '#ffffff',
-            logging: true,
-            windowWidth: element.scrollWidth,
-            windowHeight: element.scrollHeight
-        });
-
-        console.log('Canvas creado:', canvas.width, 'x', canvas.height);
-
-        // Crear PDF con jsPDF
+        const canvas = await html2canvas(element, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
         const imgData = canvas.toDataURL('image/jpeg', 1.0);
         
-        // jsPDF desde CDN UMD está en window.jspdf.jsPDF
         const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF({
-            orientation: 'portrait',
-            unit: 'mm',
-            format: 'a4'
-        });
-
-        const imgWidth = 210; // A4 width in mm
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        
-        pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+        const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+        pdf.addImage(imgData, 'JPEG', 0, 0, 210, (canvas.height * 210) / canvas.width);
         pdf.save(`${data.filename}.pdf`);
 
-        console.log('PDF generado y descargado');
-
-        // Limpiar
-        await new Promise(resolve => setTimeout(resolve, 1000));
         document.body.removeChild(container);
-
-        alert('✓ PDF generado exitosamente!');
-
+        alert('✓ PDF generado!');
     } catch (err) {
-        console.error('Error completo:', err);
-        alert('✗ Error al generar PDF: ' + err.message);
+        console.error(err);
+        alert('✗ Error: ' + err.message);
     } finally {
         btn.innerText = originalText;
         btn.disabled = false;
