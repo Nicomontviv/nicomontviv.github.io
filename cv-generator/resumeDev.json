@@ -1,0 +1,145 @@
+{
+  "basics": {
+    "name": "Nicolás Montanari Viviers",
+    "label": "Full Stack Developer",
+    "email": "nicomontviv@gmail.com",
+    "website": "https://nicomontviv.github.io",
+    "location": {
+      "city": "La Plata",
+      "countryCode": "AR",
+      "region": "Buenos Aires"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "nicomontviv",
+        "url": "https://github.com/nicomontviv"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "nicomontviv",
+        "url": "https://www.linkedin.com/in/nicomontviv/"
+      }
+    ],
+    "summary": "Advanced Computer Science student at UNLP and Full Stack Developer with freelance experience building web applications and PWAs. Strong background in algorithms, databases, and operating systems. Competitive programming participant (ICPC Latin America Regionals). Comfortable working in English-speaking, remote, and technical environments."
+  },
+  "work": [
+    {
+      "name": "Freelance",
+      "position": "Full Stack Developer",
+      "startDate": "2022-03",
+      "summary": "Design and development of web applications and PWAs using JavaScript, Node.js, SQL, and responsive design principles. Experience gathering requirements, implementing backend logic, and delivering functional solutions to real clients."
+    },
+    {
+      "name": "Bilingual",
+      "position": "English-Spanish Medical Interpreter",
+      "startDate": "2025-01",
+      "summary": "Professional simultaneous interpretation for medical consultations, demonstrating high-level communication skills and accuracy in technical and sensitive contexts."
+    },
+    {
+      "name": "Mundo Lingo",
+      "position": "Manager – Mundo Lingo La Plata",
+      "startDate": "2024-12-11",
+      "summary": "Management and organization of international language-exchange events. Coordination of hosts, community management, and operational planning in a multicultural environment."
+    },
+    {
+      "name": "Rincón Club",
+      "position": "Sales Closer",
+      "startDate": "2018-01",
+      "endDate": "2021-08",
+      "summary": "Customer-facing sales role focused on needs assessment, negotiation, and closing vacation membership agreements."
+    },
+    {
+      "name": "Rincón Travel",
+      "position": "Administrative Manager",
+      "startDate": "2021-09",
+      "endDate": "2022-12",
+      "summary": "Administrative management, reservation systems handling, and customer support for a travel agency."
+    }
+  ],
+  "education": [
+    {
+      "institution": "National University of La Plata (UNLP)",
+      "area": "Bachelor's Degree in Computer Science",
+      "studyType": "Bachelor of Computer Science (in progress)",
+      "startDate": "2022-02",
+      "endDate": "Present",
+      "courses": [
+        "Algorithms Analysis",
+        "Database Design",
+        "Operating Systems"
+      ]
+    },
+    {
+      "institution": "Colegio Nacional Rafael Hernández (UNLP)",
+      "area": "High School Diploma",
+      "studyType": "Secondary Education",
+      "startDate": "2010-03",
+      "endDate": "2015-12"
+    }
+  ],
+  "awards": [
+    {
+      "title": "Qualification for the Argentine Programming Tournament (ICPC) 2024",
+      "date": "2024-09",
+      "awarder": "ICPC Argentina / UNLP",
+      "summary": "Qualified with the UNLP team to the Latin America regional stage of the ICPC."
+    },
+    {
+      "title": "Participation in Latin America Regionals (ICPC) 2024",
+      "date": "2024-11",
+      "awarder": "ICPC Argentina / UNLP",
+      "summary": "Represented UNLP in the Latin America regional stage of the ICPC."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming Languages",
+      "keywords": ["Java", "JavaScript", "Rust", "SQL", "Shell Scripting"]
+    },
+    {
+      "name": "Frameworks / Technologies",
+      "keywords": ["Node.js", "Express.js", "Spring Boot", "HTML", "CSS"]
+    },
+    {
+      "name": "Computer Science Fundamentals",
+      "keywords": [
+        "Algorithms",
+        "Data Structures",
+        "Database Design",
+        "Operating Systems"
+      ]
+    },
+    {
+      "name": "Development Practices",
+      "keywords": [
+        "REST APIs",
+        "Responsive Design",
+        "Agile Planning",
+        "Task Prioritization",
+        "Version Control (Git)"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "Spanish",
+      "fluency": "Native"
+    },
+    {
+      "language": "English",
+      "fluency": "Fluent"
+    },
+    {
+      "language": "French",
+      "fluency": "Intermediate"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Freelance Web Applications",
+      "description": "Development of web platforms, booking systems, and interactive applications for real clients.",
+      "keywords": ["PWA", "Node.js", "JavaScript", "SQL", "Responsive Design"]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de CV | SaaS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Generador de CV</h1>
+            <p>Completá el formulario, agregá tus hitos y descargá tu CV profesional en PDF.</p>
+        </header>
+
+        <form id="cv-form">
+            <section>
+                <h2>1. Información Personal</h2>
+                <div class="grid">
+                    <input type="text" id="name" placeholder="Nombre Completo" required>
+                    <input type="text" id="label" placeholder="Profesión (ej: Software Engineer)" required>
+                    <input type="email" id="email" placeholder="Correo Electrónico" required>
+                    <input type="text" id="city" placeholder="Ciudad (ej: La Plata)" required>
+                    <input type="text" id="region" placeholder="Provincia/Estado" required>
+                </div>
+                <textarea id="summary" placeholder="Resumen profesional / Perfil" rows="3"></textarea>
+            </section>
+
+            <section id="work-section">
+                <h2>2. Experiencia Laboral</h2>
+                <div id="work-list"></div>
+                <button type="button" class="btn-add" onclick="addWork()">+ Agregar Experiencia</button>
+            </section>
+
+            <section id="education-section">
+                <h2>3. Educación</h2>
+                <div id="education-list"></div>
+                <button type="button" class="btn-add" onclick="addEducation()">+ Agregar Educación</button>
+            </section>
+
+            <section id="awards-section">
+                <h2>4. Premios y Reconocimientos</h2>
+                <div id="awards-list"></div>
+                <button type="button" class="btn-add" onclick="addAward()">+ Agregar Premio</button>
+            </section>
+
+            <section>
+                <h2>5. Otros Datos</h2>
+                <div class="grid">
+                    <input type="text" id="skills" placeholder="Habilidades (separadas por coma)">
+                    <input type="text" id="languages" placeholder="Idiomas (ej: Inglés - Avanzado)">
+                </div>
+            </section>
+
+            <div class="download-area">
+                <input type="text" id="pdf-name" placeholder="Nombre del archivo (ej: CV_Nicolas)" required>
+                <button type="submit" id="submit-btn">Generar y Descargar PDF</button>
+            </div>
+        </form>
+    </div>
+    
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+-->
+ <!-- REEMPLAZAR html2pdf.js por estas dos librerías: -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <script src="main.js"></script>
+</body>
+</html>

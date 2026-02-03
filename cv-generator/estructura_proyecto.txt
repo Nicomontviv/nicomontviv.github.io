@@ -1,0 +1,21 @@
+MAPA DEL PROYECTO
+Directorio raíz: /c/ProyectosWeb/personalPortafolio/cv-generator
+Fecha de generación: ju., 15 de ene. de 2026 10:06:40
+------------------------------------------
+
+.
+./carpetas-archivos.sh
+./CV Nicolas Montanari DEV.pdf
+./estructura_proyecto.txt
+./generate-pdf.js
+./package-lock.json
+./package.json
+./public
+./public/index.html
+./public/main.js
+./public/style.css
+./resume.json
+./resumeDev.json
+./resumeEng.json
+./server.js
+./temp

@@ -1,0 +1,134 @@
+{
+  "basics": {
+    "name": "Nicolás Montanari Viviers",
+    "label": "Full Stack Developer | Medical Interpreter | SDR",
+    "email": "nicomontviv@gmail.com",
+    "website":"https://nicomontviv.github.io",
+    "location": {
+      "city": "La Plata",
+      "countryCode": "AR",
+      "region": "Buenos Aires"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "nicomontviv",
+        "url": "https://github.com/nicomontviv"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "nicomontviv",
+        "url": "https://www.linkedin.com/in/nicomontviv/"
+      }
+    ],
+    "summary": "Advanced student of the Bachelor's Degree in Computer Science at UNLP. Professional medical interpreter (English/Spanish). Full stack developer with freelance experience, specializing in web technologies, scripting, and Java. Competitor in competitive programming tournaments such as ICPC."
+  },
+  "work": [
+    {
+      "name": "Bilingual",
+      "position": "English-Spanish Medical Interpreter",
+      "startDate": "2025-01",
+      "summary": "Simultaneous interpretation for medical consultations between Spanish-speaking patients and English-speaking healthcare professionals."
+    },
+    {
+  "name": "Mundo Lingo",
+  "position": "Manager – Mundo Lingo La Plata",
+  "startDate": "2025-12-11",
+  "summary": "Manager of Mundo Lingo La Plata (mundolingo.org). Responsible for organizing international language-exchange events, managing a multicultural community, coordinating hosts, and promoting events through social media while ensuring a welcoming experience for attendees."
+},
+    {
+      "name": "Rincón Club",
+      "position": "Sales Closer",
+      "startDate": "2018-01",
+      "endDate": "2021-08",
+      "summary": "Sale of vacation memberships and personalized attention to potential clients."
+    },
+    {
+      "name": "Rincón Travel",
+      "position": "Administrative Manager",
+      "startDate": "2021-09",
+      "endDate": "2022-12",
+      "summary": "Management of reservations, customer service, and administrative tasks for the associated travel agency."
+    },
+    {
+      "name": "Freelance",
+      "position": "Full Stack Developer",
+      "startDate": "2022-03",
+      "summary": "Development of progressive web applications (PWAs) for diverse clients using modern web stack technologies."
+    }
+  ],
+ "education": [
+  {
+    "institution": "National University of La Plata (UNLP)",
+    "area": "Bachelor's Degree in Computer Science",
+    "studyType": "Bachelor of Computer Science (in progress)",
+    "startDate": "2022-02",
+    "endDate": "Present",
+    "courses": ["Algorithms Analysis", "Database Design", "Operating Systems"]
+  },
+  {
+    "institution": "Colegio Nacional Rafael Hernández (UNLP)",
+    "area": "High School Diploma",
+    "studyType": "Secondary Education",
+    "startDate": "2010-03",
+    "endDate": "2015-12"
+  }
+],
+  "awards": [
+    {
+      "title": "Qualification for the Argentine Programming Tournament (ICPC) 2024",
+      "date": "2024-09",
+      "awarder": "ICPC Argentina / UNLP",
+      "summary": "Qualified with the UNLP team to the Latin America regional stage of the ICPC."
+    },
+    {
+      "title": "Participation in Latin America Regionals (ICPC) 2024",
+      "date": "2024-11",
+      "awarder": "ICPC Argentina / UNLP",
+      "summary": "Represented UNLP in the Latin America regional stage of the ICPC."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming Languages",
+      "keywords": ["Java", "JavaScript", "Rust", "SQL", "Shell Scripting", "Pascal"]
+    },
+    {
+      "name": "Frameworks / Technologies",
+      "keywords": ["HTML", "CSS", "Node.js", "Spring Boot", "Express.js"]
+    },
+    {
+      "name": "Project Management",
+      "keywords": [
+        "User Stories",
+        "Use Cases",
+        "Execution Time Diagrams",
+        "Petri Nets",
+        "Agile Planning",
+        "Task Prioritization",
+        "Team Coordination"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "Spanish",
+      "fluency": "Native"
+    },
+    {
+      "language": "English",
+      "fluency": "Fluent"
+    },
+    {
+      "language": "French",
+      "fluency": "Intermediate"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Freelance Projects",
+      "description": "Development of web platforms, booking systems, and interactive applications.",
+      "keywords": ["PWA", "Node.js", "JavaScript", "Responsive Design"]
+    }
+  ]
+}

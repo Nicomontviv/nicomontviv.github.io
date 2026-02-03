@@ -1,0 +1,130 @@
+{
+  "basics": {
+    "name": "Nicolás Montanari Viviers",
+    "label": "Desarrollador Full Stack | Intérprete Médico | SDR",
+    "email": "nicomontviv@gmail.com",
+    "website":"https://nicomontviv.github.io",
+    "location": {
+      "city": "La Plata",
+      "countryCode": "AR",
+      "region": "Buenos Aires"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "nicomontviv",
+        "url": "https://github.com/nicomontviv"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "nicomontviv",
+        "url": "https://www.linkedin.com/in/nicomontviv/"
+      }
+    ],
+    "summary": "Estudiante avanzado de la Licenciatura en Informática en la UNLP. Intérprete médico profesional (inglés/español). Desarrollador full stack con experiencia freelance, especializado en tecnologías web, scripting y Java. Competidor en torneos de programación competitiva como el ICPC."
+  },
+  "work": [
+    {
+      "name": "Bilingual",
+      "position": "Intérprete Médico Inglés-Español",
+      "startDate": "2025-01",
+      "summary": "Interpretación simultánea para consultas médicas entre pacientes hispanohablantes y profesionales médicos angloparlantes."
+    },
+    {
+  "name": "Mundo Lingo",
+  "position": "Manager – Mundo Lingo La Plata",
+  "startDate": "2025-12-11",
+  "summary": "Manager de Mundo Lingo La Plata (mundolingo.org). Responsable de la organización de eventos internacionales de intercambio de idiomas, gestión de una comunidad multicultural, coordinación de hosts y promoción de eventos en redes sociales, asegurando una experiencia positiva y ordenada para los asistentes."
+}
+,
+    {
+      "name": "Rincón Club",
+      "position": "Closer de Ventas",
+      "startDate": "2018-01",
+      "endDate": "2021-08",
+      "summary": "Venta de membresías vacacionales y atención personalizada a clientes potenciales."
+    },
+    {
+      "name": "Rincón Travel",
+      "position": "Gestor Administrativo",
+      "startDate": "2021-09",
+      "endDate": "2022-12",
+      "summary": "Gestión de reservas, atención al cliente y tareas administrativas para la agencia de viajes asociada."
+    },
+    {
+      "name": "Freelance",
+      "position": "Desarrollador Full Stack",
+      "startDate": "2021-02",
+      "endDate": "Presente",
+      "summary": "Desarrollo de aplicaciones web progresivas (PWAs) para clientes diversos usando tecnologías modernas del stack web."
+    }
+  ],
+  "education": [
+    {
+      "institution": "Universidad Nacional de La Plata (UNLP)",
+      "area": "Licenciatura en Informática",
+      "studyType": "Carrera de grado",
+      "startDate": "2022-02",
+      "endDate": "Presente",
+      "gpa": "",
+      "courses": ["Análisis de Algoritmos", "Diseño de Base de Datos", "Sistemas Operativos"]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Clasificación Torneo Argentino de Programación (ICPC) 2024",
+      "date": "2024-09",
+      "awarder": "ICPC Argentina / UNLP",
+      "summary": "Clasificado junto con el equipo de la UNLP a la instancia regional del ICPC Latinoamérica."
+    },
+    {
+      "title": "Participación en Latinoamérica Regionals (ICPC) 2024",
+      "date": "2024-11",
+      "awarder": "ICPC Argentina / UNLP",
+      "summary": "Representando a la UNLP en la instancia regional del ICPC Latinoamérica."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Lenguajes de programación",
+      "keywords": ["Java", "JavaScript", "Rust", "SQL", "Shell Scripting", "Pascal"]
+    },
+    {
+      "name": "Frameworks / Tecnologías",
+      "keywords": ["HTML", "CSS", "Node.js", "Spring Boot", "Express.js"]
+    },
+    {
+      "name": "Gestión de Proyectos",
+      "keywords": [
+        "Historias de Usuario",
+        "Casos de Uso",
+        "Diagramas de Tiempo de Ejecución",
+        "Redes de Petri",
+        "Planificación Ágil",
+        "Priorización de Tareas",
+        "Coordinación de Equipos"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "Español",
+      "fluency": "Nativo"
+    },
+    {
+      "language": "Inglés",
+      "fluency": "Fluido"
+    },
+    {
+      "language": "Francés",
+      "fluency": "Intermedio"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Proyectos Freelance",
+      "description": "Desarrollo de plataformas web, sistemas de reservas y aplicaciones interactivas.",
+      "keywords": ["PWA", "Node.js", "JavaScript", "Responsive Design"]
+    }
+  ]
+}
