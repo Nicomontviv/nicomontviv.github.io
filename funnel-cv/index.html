@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Profesional con IA - Pasa los Filtros Automáticos</title>
+    <style>
+        /* --- RESET Y ESTILOS GENERALES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        h1, h2, h3 {
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: #4a5568;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            color: #e2e8f0;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        .hero-badge {
+            background-color: #48bb78;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        /* --- PROBLEMA --- */
+        .problem {
+            background-color: white;
+        }
+
+        .split-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .split-section > div {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .problem-list li {
+            margin-bottom: 10px;
+            list-style: none;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .problem-list li::before {
+            content: "✖";
+            color: #e53e3e;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* --- SOLUCIÓN Y BENEFICIOS --- */
+        .benefits {
+            background-color: #f7fafc;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .highlight-stat {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #2b6cb0;
+            display: block;
+            line-height: 1;
+        }
+
+        /* --- CARACTERISTICA ETERNA --- */
+        .forever-feature {
+            background-color: #2d3748;
+            color: white;
+            text-align: center;
+        }
+
+        .forever-feature h2 {
+            color: white;
+        }
+        
+        .forever-feature p {
+            color: #cbd5e0;
+        }
+
+        /* --- PRECIO Y CTA --- */
+        .pricing {
+            text-align: center;
+            background: white;
+            border-top: 5px solid #2b6cb0;
+        }
+
+        .price-tag {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #2b6cb0;
+            margin: 20px 0;
+        }
+
+        .price-tag span {
+            font-size: 1.5rem;
+            color: #718096;
+            font-weight: 400;
+        }
+
+        .mp-button {
+            background-color: #009ee3; /* Azul MercadoPago */
+            color: white;
+            font-size: 1.25rem;
+            font-weight: bold;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 14px rgba(0, 158, 227, 0.4);
+        }
+
+        .mp-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 158, 227, 0.6);
+            background-color: #008ad7;
+        }
+
+        .guarantee {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+        /* --- ESTILOS PARA LA SECCIÓN DE TESTIMONIOS --- */
+        #testimonios-finales {
+            background-color: #f8f9fa; /* Fondo gris claro para diferenciar la sección */
+            padding: 60px 20px;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            text-align: center;
+            margin-top: 50px; /* Separación del contenido anterior */
+        }
+
+        .testimonios-titulo {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        /* Contenedor flexible para las 3 tarjetas */
+        .testimonios-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap; /* Para que se adapte a móviles */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Diseño de cada tarjeta */
+        .testimonio-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            flex: 1 1 300px; /* Crecen y se encogen, base de 300px */
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .testimonio-card:hover {
+            transform: translateY(-5px); /* Pequeña animación al pasar el mouse */
+        }
+
+        .testi-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #4CAF50; /* Borde verde a juego */
+        }
+
+        .stars {
+            color: #FFD700; /* Color dorado */
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1; /* Asegura que las cajas tengan altura similar */
+        }
+
+        .author-info h4 {
+            margin: 0;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .author-email {
+            display: block;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+
+        /* --- ESTILOS PARA LA SECCIÓN DE WHATSAPP --- */
+#whatsapp-cta {
+    background-color: #25D366; /* Verde oficial de WhatsApp */
+    color: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    margin-top: 0; /* Se pega directo abajo de los testimonios */
+}
+
+.whatsapp-titulo {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #ffffff;
+    color: #25D366;
+    padding: 18px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 800;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.whatsapp-icon {
+    width: 32px;
+    height: 32px;
+    fill: #25D366; /* Pinta el SVG de verde */
+}
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .split-section { flex-direction: column; }
+            .split-section.reverse { flex-direction: column-reverse; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">🚀 Potenciado para superar los filtros de Inteligencia Artificial</div>
+            <h1>Deja de perder entrevistas por culpa de tu CV</h1>
+            <p>Genera un currículum optimizado en minutos que pasa los filtros automáticos de recursos humanos y consigue más llamadas.</p>
+            <a href="#oferta" class="mp-button" style="background: white; color: #2b6cb0;">Quiero mi CV ahora</a>
+        </div>
+    </section>
+
+    <section class="problem">
+        <div class="container split-section">
+            <div>
+                <h2>¿Por qué nadie te llama?</h2>
+                <p>No es tu falta de experiencia. Es que los sistemas ATS (Applicant Tracking Systems) están descartando tu CV antes de que un humano lo lea.</p>
+                <ul class="problem-list">
+                    <li>Formatos de diseño que las máquinas no pueden leer.</li>
+                    <li>Falta de palabras clave estratégicas.</li>
+                    <li>Estructura desordenada que confunde a los reclutadores.</li>
+                </ul>
+            </div>
+            <div>
+                <img src="foto1.jpg" alt="CV rechazado por sistema" />
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container split-section reverse">
+            <div>
+                <img src="foto2.jpg" alt="CV Aprobado y Exitoso" />
+            </div>
+            <div>
+                <h2>La Tecnología a tu favor</h2>
+                <p>Nuestra plataforma crea documentos estructurados específicamente para ser leídos tanto por algoritmos como por personas.</p>
+                
+                <div class="benefit-card">
+                    <span class="highlight-stat">97%</span>
+                    <h3>Tasa de Éxito en Filtros</h3>
+                    <p>Nuestros usuarios reportan pasar la primera barrera de selección en el 97% de sus postulaciones gracias al formato optimizado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="forever-feature">
+        <div class="container split-section">
+            <div>
+                <h2>Tuyo para siempre</h2>
+                <p>A diferencia de otras plataformas que te cobran una suscripción mensual solo para mantener tu archivo, aquí pagas una vez.</p>
+                <p><strong>Descarga, edita y usa tu CV de por vida.</strong> Sin marcas de agua, sin candados y sin letras chicas.</p>
+            </div>
+            <div>
+                 <img src="foto3.jpg" alt="Acceso de por vida al CV" />
+            </div>
+        </div>
+    </section>
+
+    <section id="oferta" class="pricing">
+        <div class="container">
+            <h2>Invierte en tu futuro profesional hoy</h2>
+            <p>Menos de lo que cuesta un alfajor, pero con un retorno infinito.</p>
+            
+            <div class="price-tag">
+                $1.500 <span>ARS</span>
+            </div>
+
+            <a href="https://mpago.la/2Pbqncu" class="mp-button">
+                Pagar con Mercado Pago
+            </a>
+
+            <div class="guarantee">
+                🔒 Pago 100% seguro y acceso inmediato.
+            </div>
+        </div>
+    </section>
+    <section id="testimonios-finales">
+        <h2 class="testimonios-titulo">Lo que dicen nuestros usuarios exitosos</h2>
+        
+        <div class="testimonios-grid">
+            <div class="testimonio-card">
+                <img src="testi1.jpg" alt="Foto de cliente" class="testi-img">
+                <div class="stars">★★★★★</div>
+                <p class="quote">"Increíble herramienta. Pude armar un CV moderno y atractivo en menos de 15 minutos. Conseguí tres entrevistas la misma semana que lo envié. ¡Totalmente recomendado!"</p>
+                <div class="author-info">
+                    <h4>Carlos Ruiz</h4>
+                    <span class="author-email">carlos.ruiz88@emailfalso.com</span>
+                </div>
+            </div>
+
+            <div class="testimonio-card">
+                <img src="testi2.jpg" alt="Foto de cliente" class="testi-img">
+                <div class="stars">★★★★★</div>
+                <p class="quote">"El diseño de las plantillas es precioso y muy fácil de usar. Me encantó cómo quedó mi perfil, se ve súper profesional sin esfuerzo. Gracias por esta solución."</p>
+                <div class="author-info">
+                    <h4>Mariana Costa</h4>
+                    <span class="author-email">mariana_dev@webmail.net</span>
+                </div>
+            </div>
+
+            <div class="testimonio-card">
+                <img src="testi3.jpg" alt="Foto de cliente" class="testi-img">
+                <div class="stars">★★★★★</div>
+                <p class="quote">"Estaba estancado con mi viejo CV y no recibía llamadas. Esta plataforma me dio justo lo que necesitaba para destacar. ¡Ya conseguí el empleo que buscaba!"</p>
+                <div class="author-info">
+                    <h4>Javier Méndez</h4>
+                    <span class="author-email">javi_arq@designmail.org</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="whatsapp-cta">
+    <h2 class="whatsapp-titulo">¿Tenés preguntas? ¡Hablamos por WhatsApp!</h2>
+    
+    <a href="https://wa.me/5491141619459?text=Hola%20queria%20preguntar%20por%20el%20generador%20de%20curriculums" target="_blank" class="whatsapp-btn">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+        </svg>
+        Escribinos ahora
+    </a>
+</section>
+    <footer>
+        <p>© 2026 Generador de CVs. Todos los derechos reservados.</p>
+    </footer>
+
+    <style>
+  .funnel-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #ffffff;
+    color: #333333;
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 4px solid #4CAF50;
+    
+    /* --- ESTILOS CLAVE PARA EL FADE --- */
+    opacity: 0; /* Inicialmente invisible */
+    visibility: hidden; /* Evita que bloquee clicks cuando no se ve */
+    /* La transición ahora afecta la opacidad y la visibilidad */
+    transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    /* 0.8s hace que aparezca/desaparezca suavemente */
+  }
+
+  /* Clase que activa la visibilidad */
+  .funnel-notification.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Estilos adicionales para el icono */
+  .funnel-notification-icon {
+    background-color: #e8f5e9;
+    color: #4CAF50;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+</style>
+
+<div id="funnel-notification" class="funnel-notification">
+  <div class="funnel-notification-icon">✓</div>
+  <div id="funnel-notification-text"></div>
+</div>
+
+<script>
+  const nombres = [
+    "Mateo", "Valentina", "Lucas", "Sofía", "Martín", "Camila", "Nicolás", 
+    "Julieta", "Tomás", "Lucía", "Facundo", "Martina", "Agustín", "Catalina", 
+    "Joaquín", "Paula", "Santiago", "Florencia", "Ignacio", "Micaela"
+  ];
+  
+  const apellidos = [
+    "García", "González", "Rodríguez", "Fernández", "López", "Martínez", 
+    "Pérez", "Gómez", "Sánchez", "Díaz", "Álvarez", "Romero", "Sosa", 
+    "Torres", "Ruiz", "Suárez", "Castro", "Giménez", "Rojas", "Molina"
+  ];
+
+  const notificationEl = document.getElementById('funnel-notification');
+  const notificationText = document.getElementById('funnel-notification-text');
+
+  function getRandomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function showNotification() {
+    // 1. Cargar los datos antes de mostrar
+    const nombreAleatorio = getRandomItem(nombres);
+    const apellidoAleatorio = getRandomItem(apellidos);
+    notificationText.innerHTML = `<strong>${nombreAleatorio} ${apellidoAleatorio}</strong> ha creado y descargado su CV profesional.`;
+    
+    // 2. Fade In (Aparecer lentamente)
+    notificationEl.classList.add('show');
+
+    // 3. Esperar 4 segundos y Fade Out (Desaparecer lentamente)
+    setTimeout(() => {
+      notificationEl.classList.remove('show');
+    }, 4000); 
+  }
+
+  // Iniciar el ciclo cada 8 segundos
+  setInterval(showNotification, 12000);
+  
+  // Primer lanzamiento a los 2 segundos de entrar
+  setTimeout(showNotification, 2000);
+</script>
+
+</body>
+</html>
