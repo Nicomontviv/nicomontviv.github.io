@@ -91,7 +91,13 @@ function sanitizeHTML(text) {
     return text ? text.trim() : '';
 }
 
-// 4. Lógica de Generación
+// ============================================
+// GENERACIÓN DE PDF - LÓGICA CORREGIDA
+// Estrategia: render off-screen con posición absoluta
+// fuera del viewport, captura con html2canvas a alta
+// resolución, luego divide en páginas A4 exactas.
+// ============================================
+
 document.getElementById('cv-form').onsubmit = async (e) => {
     e.preventDefault();
     
@@ -100,8 +106,7 @@ document.getElementById('cv-form').onsubmit = async (e) => {
     btn.innerText = 'Generando...';
     btn.disabled = true;
 
-    // --- CONFIGURACIÓN DE IDIOMA ---
-    const lang = document.getElementById('cv-language').value; // Asegúrate de tener este ID en tu HTML
+    const lang = document.getElementById('cv-language').value;
     const labels = {
         es: {
             summary: "RESUMEN",
@@ -128,8 +133,10 @@ document.getElementById('cv-form').onsubmit = async (e) => {
     };
     const t = labels[lang];
 
+    // Contenedor off-screen que usaremos para renderizar
+    let wrapper = null;
+
     try {
-        // Recopilar datos 
         const data = {
             basics: {
                 name: sanitizeHTML(document.getElementById('name').value),
@@ -167,98 +174,190 @@ document.getElementById('cv-form').onsubmit = async (e) => {
             })),
             skills: sanitizeHTML(document.getElementById('skills').value),
             languages: sanitizeHTML(document.getElementById('languages').value),
-            filename: document.getElementById('pdf-name').value.trim() || 'CV_Nicolas_Montanari'
+            filename: document.getElementById('pdf-name').value.trim() || 'CV'
         };
 
-        // --- VARIABLE DEL TEMPLATE ---
-        const cvTemplate = `
-            <div id="cv-render" style="width: 210mm; min-height: 297mm; background: #ffffff; padding: 20mm; box-sizing: border-box; font-family: Arial, sans-serif; color: #000; font-size: 12px;">
-                <div style="border-bottom: 3px solid #000; padding-bottom: 12px; margin-bottom: 20px;">
-                    <h1 style="font-size: 32px; margin: 0 0 8px 0; text-transform: uppercase; font-weight: bold;">${data.basics.name}</h1>
-                    <div style="font-size: 16px; font-weight: bold; color: #444; margin: 6px 0;">${data.basics.label}</div>
-                    <div style="font-size: 13px; color: #555;">${data.basics.email} | ${data.basics.location.city}, ${data.basics.location.region}</div>
+        // Dimensiones A4: 794px × 1123px a 96dpi
+        // Usamos 210mm en px con escala 2x para calidad
+        const PAGE_W_PX = 794;   // ancho A4 a 96dpi
+        const PAGE_H_PX = 1123;  // alto A4 a 96dpi
+        const SCALE    = 2;       // factor de escala para nitidez
+        const PADDING  = '15mm';  // margen interior del CV
+
+        const cvHTML = `
+            <div id="cv-render" style="
+                width: ${PAGE_W_PX}px;
+                background: #ffffff;
+                padding: ${PADDING};
+                box-sizing: border-box;
+                font-family: Arial, Helvetica, sans-serif;
+                color: #000;
+                font-size: 12px;
+                line-height: 1.5;
+            ">
+                <!-- ENCABEZADO -->
+                <div style="border-bottom: 3px solid #000; padding-bottom: 12px; margin-bottom: 18px;">
+                    <h1 style="font-size: 30px; margin: 0 0 6px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">${data.basics.name}</h1>
+                    <div style="font-size: 15px; font-weight: bold; color: #333; margin-bottom: 4px;">${data.basics.label}</div>
+                    <div style="font-size: 12px; color: #555;">${data.basics.email} | ${data.basics.location.city}, ${data.basics.location.region}</div>
                 </div>
 
+                <!-- RESUMEN -->
                 ${data.basics.summary ? `
-                <div style="margin-bottom: 20px;">
-                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold;">${t.summary}</h2>
+                <div style="margin-bottom: 18px;">
+                    <h2 style="font-size: 14px; border-bottom: 1.5px solid #000; text-transform: uppercase; margin: 0 0 8px 0; padding-bottom: 3px; font-weight: bold; letter-spacing: 0.5px;">${t.summary}</h2>
                     <p style="font-size: 12px; margin: 0; line-height: 1.6; text-align: justify;">${data.basics.summary}</p>
                 </div>` : ''}
 
-                <div style="margin-bottom: 20px;">
-                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold;">${t.experience}</h2>
+                <!-- EXPERIENCIA -->
+                ${data.work.length > 0 ? `
+                <div style="margin-bottom: 18px;">
+                    <h2 style="font-size: 14px; border-bottom: 1.5px solid #000; text-transform: uppercase; margin: 0 0 8px 0; padding-bottom: 3px; font-weight: bold; letter-spacing: 0.5px;">${t.experience}</h2>
                     ${data.work.map(job => `
-                    <div style="margin-bottom: 16px; page-break-inside: avoid;">
-                        <div style="margin-bottom: 4px;">
-                            <strong style="font-size: 13px;">${job.position} - ${job.name}</strong>
-                            <span style="float: right; font-size: 12px; color: #666;">${job.displayDate}</span>
-                            <div style="clear: both;"></div>
-                        </div>
-                        <p style="font-size: 12px; margin: 4px 0 0 0; line-height: 1.5; text-align: justify;">${job.summary}</p>
-                    </div>`).join('')}
-                </div>
-
-                <div style="margin-bottom: 20px;">
-                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold;">${t.education}</h2>
-                    ${data.education.map(edu => `
-                    <div style="margin-bottom: 14px; page-break-inside: avoid;">
-                        <div style="margin-bottom: 3px;">
-                            <strong style="font-size: 13px;">${edu.institution}</strong>
-                            <span style="float: right; font-size: 12px; color: #666;">${edu.displayDate}</span>
-                            <div style="clear: both;"></div>
-                        </div>
-                        <div style="font-size: 12px; font-style: italic; color: #444;">${edu.area} ${edu.statusLabel}</div>
-                    </div>`).join('')}
-                </div>
-
-                ${data.awards.length > 0 ? `
-                <div style="margin-bottom: 20px;">
-                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold;">${t.awards}</h2>
-                    ${data.awards.map(a => `
-                    <div style="margin-bottom: 10px;">
-                        <strong>${a.title}</strong> ${a.awarder ? `- ${a.awarder}` : ''}
-                        <span style="float: right; color: #666;">${a.date}</span>
-                        <div style="clear: both;"></div>
+                    <div style="margin-bottom: 14px;">
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:3px;">
+                            <tr>
+                                <td style="font-size:13px; font-weight:bold; padding:0;">${job.position} — ${job.name}</td>
+                                <td style="font-size:12px; color:#555; text-align:right; white-space:nowrap; padding:0; padding-left:8px;">${job.displayDate}</td>
+                            </tr>
+                        </table>
+                        <p style="font-size:12px; margin:0; line-height:1.55; text-align:justify;">${job.summary}</p>
                     </div>`).join('')}
                 </div>` : ''}
 
+                <!-- EDUCACIÓN -->
+                ${data.education.length > 0 ? `
+                <div style="margin-bottom: 18px;">
+                    <h2 style="font-size: 14px; border-bottom: 1.5px solid #000; text-transform: uppercase; margin: 0 0 8px 0; padding-bottom: 3px; font-weight: bold; letter-spacing: 0.5px;">${t.education}</h2>
+                    ${data.education.map(edu => `
+                    <div style="margin-bottom: 12px;">
+                        <table style="width:100%; border-collapse:collapse; margin-bottom:2px;">
+                            <tr>
+                                <td style="font-size:13px; font-weight:bold; padding:0;">${edu.institution}</td>
+                                <td style="font-size:12px; color:#555; text-align:right; white-space:nowrap; padding:0; padding-left:8px;">${edu.displayDate}</td>
+                            </tr>
+                        </table>
+                        <div style="font-size:12px; font-style:italic; color:#333;">${edu.area}${edu.statusLabel ? ' <span style="color:#666;">'+edu.statusLabel+'</span>' : ''}</div>
+                    </div>`).join('')}
+                </div>` : ''}
+
+                <!-- PREMIOS -->
+                ${data.awards.length > 0 ? `
+                <div style="margin-bottom: 18px;">
+                    <h2 style="font-size: 14px; border-bottom: 1.5px solid #000; text-transform: uppercase; margin: 0 0 8px 0; padding-bottom: 3px; font-weight: bold; letter-spacing: 0.5px;">${t.awards}</h2>
+                    ${data.awards.map(a => `
+                    <div style="margin-bottom: 8px;">
+                        <table style="width:100%; border-collapse:collapse;">
+                            <tr>
+                                <td style="font-size:12px; padding:0;"><strong>${a.title}</strong>${a.awarder ? ' — ' + a.awarder : ''}</td>
+                                <td style="font-size:12px; color:#555; text-align:right; white-space:nowrap; padding:0; padding-left:8px;">${a.date}</td>
+                            </tr>
+                        </table>
+                    </div>`).join('')}
+                </div>` : ''}
+
+                <!-- HABILIDADES E IDIOMAS -->
+                ${(data.skills || data.languages) ? `
                 <div>
-                    <h2 style="font-size: 16px; border-bottom: 2px solid #000; text-transform: uppercase; margin: 0 0 10px 0; padding-bottom: 4px; font-weight: bold;">${t.skills_lang}</h2>
-                    <p style="font-size: 12px; margin: 0 0 8px 0;"><strong>${t.skills}:</strong> ${data.skills}</p>
-                    <p style="font-size: 12px; margin: 0;"><strong>${t.languages}:</strong> ${data.languages}</p>
-                </div>
+                    <h2 style="font-size: 14px; border-bottom: 1.5px solid #000; text-transform: uppercase; margin: 0 0 8px 0; padding-bottom: 3px; font-weight: bold; letter-spacing: 0.5px;">${t.skills_lang}</h2>
+                    ${data.skills ? `<p style="font-size:12px; margin:0 0 6px 0;"><strong>${t.skills}:</strong> ${data.skills}</p>` : ''}
+                    ${data.languages ? `<p style="font-size:12px; margin:0;"><strong>${t.languages}:</strong> ${data.languages}</p>` : ''}
+                </div>` : ''}
             </div>
         `;
 
-        // Generación con html2canvas + jsPDF 
-        const container = document.createElement('div');
-        container.style.cssText = "position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 210mm; background: white; z-index: 10000;";
-        container.innerHTML = cvTemplate;
-        document.body.appendChild(container);
+        // ---- Render off-screen ----
+        // Colocamos el wrapper FUERA del viewport (arriba) para que
+        // html2canvas lo capture sin interferir con la página visible.
+        wrapper = document.createElement('div');
+        wrapper.style.cssText = `
+            position: absolute;
+            top: -9999px;
+            left: 0;
+            width: ${PAGE_W_PX}px;
+            background: white;
+            z-index: -1;
+        `;
+        wrapper.innerHTML = cvHTML;
+        document.body.appendChild(wrapper);
 
-        await new Promise(r => setTimeout(r, 500));
-        const element = document.getElementById('cv-render');
-        const canvas = await html2canvas(element, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
-        const imgData = canvas.toDataURL('image/jpeg', 1.0);
-        
+        // Esperamos a que el DOM termine de renderizar
+        await new Promise(r => setTimeout(r, 600));
+
+        const element = wrapper.querySelector('#cv-render');
+
+        // Capturamos con html2canvas
+        const canvas = await html2canvas(element, {
+            scale: SCALE,
+            useCORS: true,
+            backgroundColor: '#ffffff',
+            logging: false,
+            // Importante: le decimos el ancho exacto para evitar
+            // que tome el ancho del viewport
+            width: PAGE_W_PX,
+            windowWidth: PAGE_W_PX
+        });
+
+        // ---- Dividir canvas en páginas A4 ----
         const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-        pdf.addImage(imgData, 'JPEG', 0, 0, 210, (canvas.height * 210) / canvas.width);
-        pdf.save(`${data.filename}.pdf`);
+        const pdf = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4'
+        });
 
-        document.body.removeChild(container);
-        alert('✓ PDF generado!');
+        const PDF_W_MM  = 210;
+        const PDF_H_MM  = 297;
+
+        // Relación: cuántos px del canvas equivalen a una página
+        const canvasPageH = Math.floor((PAGE_H_PX * SCALE * PAGE_W_PX) / PAGE_W_PX);
+        // Más simple: calculamos cuántos píxeles de canvas corresponden a 297mm
+        const scaledPageH = Math.floor((PAGE_H_PX * SCALE));
+        const scaledTotalH = canvas.height;
+        const scaledW = canvas.width; // = PAGE_W_PX * SCALE
+
+        let pageTop = 0;
+        let pageNum = 0;
+
+        while (pageTop < scaledTotalH) {
+            if (pageNum > 0) pdf.addPage();
+
+            // Creamos un canvas temporal para esta página
+            const pageCanvas = document.createElement('canvas');
+            pageCanvas.width  = scaledW;
+            pageCanvas.height = Math.min(scaledPageH, scaledTotalH - pageTop);
+
+            const ctx = pageCanvas.getContext('2d');
+            ctx.drawImage(
+                canvas,
+                0, pageTop,          // fuente: origen
+                scaledW, pageCanvas.height,  // fuente: tamaño
+                0, 0,                // destino: origen
+                scaledW, pageCanvas.height   // destino: tamaño
+            );
+
+            const imgData = pageCanvas.toDataURL('image/jpeg', 0.98);
+
+            // Altura real de este trozo en mm (proporcional)
+            const sliceH_mm = (pageCanvas.height / scaledPageH) * PDF_H_MM;
+
+            pdf.addImage(imgData, 'JPEG', 0, 0, PDF_W_MM, sliceH_mm);
+
+            pageTop += scaledPageH;
+            pageNum++;
+        }
+
+        pdf.save(`${data.filename}.pdf`);
+        alert('✓ PDF generado correctamente!');
+
     } catch (err) {
         console.error(err);
-        alert('✗ Error: ' + err.message);
+        alert('✗ Error al generar el PDF: ' + err.message);
     } finally {
+        if (wrapper && wrapper.parentNode) {
+            document.body.removeChild(wrapper);
+        }
         btn.innerText = originalText;
         btn.disabled = false;
     }
 };
-
-// ============================================
-// IMPORTANTE: Incluir estas librerías en HTML:
-// <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-// <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-// ============================================
