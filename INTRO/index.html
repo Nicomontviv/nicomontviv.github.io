@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicolás Montanari | Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="normalize.css">
+    <style>
+        /* Configuración base minimalista */
+        :root {
+            --bg-color: #121212;       /* Negro casi puro */
+            --text-color: #e0e0e0;     /* Blanco suave */
+            --accent-color: #888888;   /* Gris para detalles */
+            --hover-color: #ffffff;    /* Blanco puro para hover */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Contenedor principal para centrado perfecto */
+        main {
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+            opacity: 0; /* Animación de entrada */
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        h1 {
+            font-weight: 200; /* Letra fina */
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        /* Lista de navegación limpia */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            font-weight: 300;
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Efecto Hover sutil: Borde y brillo */
+        .nav-links a:hover {
+            color: var(--hover-color);
+            border-color: var(--accent-color);
+            letter-spacing: 2px; /* Pequeña expansión al pasar el mouse */
+        }
+
+        /* Separador visual */
+        .separator {
+            width: 50px;
+            height: 1px;
+            background-color: var(--accent-color);
+            margin: 0 auto 3rem auto;
+        }
+
+        /* Animación suave al cargar */
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Ajuste móvil */
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <h1>Nicolás Montanari</h1>
+        <p class="subtitle">SELECCIONA UN PERFIL</p>
+        
+        <div class="separator"></div>
+
+        <ul class="nav-links">
+            <li><a href="it.html">IT PROFESSIONAL</a></li>
+            <li><a href="interpreter.html">INTERPRETER</a></li>
+            <li><a href="teacher.html">ENGLISH TRAINING</a></li>
+            <li><a href="magic.html">MAGICIAN</a></li>
+            <li><a href="funnel-cv/index.html">CREA Y DESCARGA TU CV</a></li>
+          
+            
+        </ul>
+    </main>
+
+</body>
+</html>
