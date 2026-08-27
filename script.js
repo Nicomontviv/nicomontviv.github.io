@@ -78,16 +78,18 @@ setInterval(cycleDestino, 3200);
 const horarios = [
   { day: 'LUN', time: '18:00', free: false },
   { day: 'LUN', time: '19:30', free: false },
-  { day: 'LUN', time: '20:00', free: true },
+  { day: 'LUN', time: '20:30', free: true },
   { day: 'MAR', time: '19:00', free: false },
-  { day: 'MAR', time: '20:00', free: true },
+  { day: 'MAR', time: '22:00', free: true },
+  { day: 'MIÉ', time: '08:00', free: true },
   { day: 'MIÉ', time: '18:00', free: false },
   { day: 'MIÉ', time: '19:00', free: false },
-  { day: 'MIE', time: '20:00', free: true },
-  { day: 'JUE', time: '08:00', free: true },
-  { day: 'JUE', time: '19:00', free: false },
+  { day: 'MIE', time: '20:00', free: false },
+  { day: 'MIE', time: '22:00', free: true },
+  { day: 'JUE', time: '08:00', free: false },
+  { day: 'JUE', time: '18:00', free: true },
   { day: 'VIE', time: '08:00', free: true },
-  { day: 'VIE', time: '17:00', free: false },
+  { day: 'VIE', time: '19:00', free: false },
 ];
 
 const slotsContainer = document.getElementById('slots');
