@@ -664,7 +664,14 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   color: var(--amber);
   margin-bottom: 1.4rem;
 }
-
+.ticket__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--line-strong);
+  margin-bottom: 1rem;
+}
 .ticket__quote {
   color: var(--paper-dim);
   font-size: 0.95rem;
@@ -803,141 +810,3 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 @media (max-width: 480px) {
   .viewer-toast { font-size: 0.75rem; padding: 0.6rem 0.9rem 0.6rem 0.7rem; }
 }
-
-/* ============================================================
-   HERO ALT LINK (cross-sell entre personalizadas / grupales)
-============================================================ */
-.hero__alt-link {
-  font-size: 0.88rem;
-  color: var(--paper-dimmer);
-  margin-top: 0.9rem;
-}
-
-.hero__alt-link a {
-  color: var(--teal);
-  border-bottom: 1px solid transparent;
-}
-
-.hero__alt-link a:hover { border-color: var(--teal); }
-
-/* ============================================================
-   BENEFICIOS (index.html)
-============================================================ */
-.benefit-grid {
-  display: grid;
-  gap: 1.1rem;
-  grid-template-columns: 1fr;
-  margin-top: var(--space-3);
-}
-
-@media (min-width: 720px) {
-  .benefit-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-.benefit-card {
-  background: var(--ink-card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: 1.6rem;
-}
-
-.benefit-card__icon {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  color: var(--amber);
-  display: block;
-  margin-bottom: 0.8rem;
-}
-
-.benefit-card p { font-size: 0.94rem; }
-
-/* ============================================================
-   ELEGÍ TU FORMATO (choice cards, index.html)
-============================================================ */
-.choice-grid {
-  display: grid;
-  gap: 1.3rem;
-  grid-template-columns: 1fr;
-  margin-top: var(--space-3);
-}
-
-@media (min-width: 780px) {
-  .choice-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-.choice-card {
-  background: var(--ink-card);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-lg);
-  padding: 1.8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-  transition: transform 0.15s ease, border-color 0.15s ease;
-}
-
-.choice-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--amber);
-}
-
-.choice-card--featured {
-  border-color: var(--amber);
-  position: relative;
-}
-
-.choice-card__tag {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  color: var(--amber);
-  text-transform: uppercase;
-}
-
-.choice-card h3 {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-}
-
-.choice-card__price {
-  font-family: var(--font-display);
-  font-size: 1.9rem;
-  color: var(--paper);
-  font-weight: 700;
-}
-
-.choice-card__price span {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--paper-dimmer);
-  font-weight: 400;
-  margin-left: 0.4rem;
-}
-
-.choice-card ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin: 0.2rem 0 0.6rem;
-}
-
-.choice-card li {
-  font-size: 0.88rem;
-  color: var(--paper-dim);
-  padding-left: 1.1rem;
-  position: relative;
-}
-
-.choice-card li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 6px;
-  height: 6px;
-  background: var(--teal);
-  border-radius: 2px;
-}
-
-.choice-card .btn { align-self: flex-start; margin-top: auto; }
